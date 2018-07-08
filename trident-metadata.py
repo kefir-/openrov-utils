@@ -133,7 +133,7 @@ def main():
             output_time = False
         if not dump_all:
             break
-        if d["topic"] == "FlightCameraH264Message":
+        if d["topic"] in ["FlightCameraH264Message", "FlightVideoScreenshotMessage"]:
             continue
         else:
             print("{2}.{3} {0}: {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
