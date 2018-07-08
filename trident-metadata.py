@@ -56,6 +56,17 @@ def get_documents(dump):
 
         yield((docid, data))
 
+def print_time(data, localtime, strftime_format):
+    sec = data['rx_ts']['sec']
+
+    timetuple = None
+    if localtime:
+        timetuple = time.localtime(sec)
+    else:
+        timetuple = time.gmtime(sec)
+
+    ts_str = time.strftime(strftime_format, timetuple)
+    print(ts_str)
 
 def main():
 
@@ -117,8 +128,9 @@ def main():
         # print("Got document:", i, d)
         # if i != d["topic"]:
         #     print("ID different from topic:", i, d["topic"])
-        if data is None:
-            data = d
+        if output_time:
+            print_time(d, localtime, strftime_format)
+            output_time = False
         if not dump_all:
             break
         if d["topic"] == "FlightCameraH264Message":
@@ -126,18 +138,6 @@ def main():
         else:
             print("{2}.{3} {0}: {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
 
-    if output_time:
-        sec = data['rx_ts']['sec']
-
-        timetuple = None
-        if localtime:
-            timetuple = time.localtime(sec)
-        else:
-            timetuple = time.gmtime(sec)
-
-        ts_str = time.strftime(strftime_format, timetuple)
-        print(ts_str)
-        # print(time.asctime(time.localtime(sec)))
     
 
 if __name__ == '__main__':
