@@ -13,7 +13,7 @@ def usage():
 
 def main():
 
-    strftime_format = "%Y-%m-%dT%H%M%SUTC"
+    strftime_format = "%Y%m%d-%H%M%SZ"
     localtime = False
 
     opts, args = getopt.getopt(sys.argv[1:], 'hstluf:')
