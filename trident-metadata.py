@@ -136,7 +136,8 @@ def main():
         if d["topic"] in ["FlightCameraH264Message", "FlightVideoScreenshotMessage"]:
             continue
         else:
-            print("{2}.{3} {0}: {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
+            if d["data"] != "":
+                print("{2}.{3} {0}: {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
 
     
 
