@@ -45,6 +45,7 @@ OpenROV will ditch Couchbase for something sensible in the future.
 
 I aim to try to parse all the telemetry data from the database using
 the same technique. There's lots of info in the DB, like
+
 * yaw
 * roll
 * pitch
@@ -54,4 +55,5 @@ the same technique. There's lots of info in the DB, like
 * battery percentage
 * battery voltage
 * battery temperature
+
 etc, and many appear to be logged close to once per second.
