@@ -23,16 +23,18 @@ creates some additional file names, using symlinks, so that it's easier
 (for me) to navigate many recordings. (The built in naming scheme is
 also unpractical after you've done more than a year of recordings).
 
-## trident-play.sh
+### trident-play.sh
 
+Utility that may come in handy.
 If you want to simply view a .h264 file, try the script
 `trident-play.sh`, specifying the .h264 file as the first argument. This
 script searches your PATH for vlc or ffplay, and plays the .h264 video
 directly, at the correct frame rate, without doing any heavy
 transcoding.
 
-## trident-metadata.py
+### trident-metadata.py
 
+Utility used by the other tools.
 The `trident-metadata.py` script uses the `forestdb_dump` command
 from https://github.com/couchbase/forestdb.git to dump the contents
 of the couchbase database, and parses the hex output from there to
