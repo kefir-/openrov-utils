@@ -10,6 +10,10 @@ if [ ! -e "$TARGET_PATH" ]; then
     mkdir -p "$TARGET_PATH"
 fi
 
+if [ ! -z "$1" ]; then
+    SWEECH_URL="$1";
+fi
+
 # Find where the URL has been set
 if [ -z $SWEECH_URL ] && [ ! -e $HOME/.config/sweech.json ]; then
     echo "No SWEECH_URL given, and $HOME/.config/sweech.json doesn't exist."
