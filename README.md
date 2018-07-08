@@ -38,7 +38,8 @@ from https://github.com/couchbase/forestdb.git to dump the contents
 of the couchbase database, and parses the hex output from there to
 recreate some json, with the final aim of fetching a timestamp. This
 is a hopeless cludge, but I've not had much help from either 
-Couchbase (not to be confused with Apache CouchDB, which is something
+[Couchbase](https://forums.couchbase.com/t/export-or-query-data-from-cblite2-database/17066)
+(not to be confused with Apache CouchDB, which is something
 else) or OpenROV in finding a better solution for this. Hopefully
 OpenROV will ditch Couchbase for something sensible in the future.
 
