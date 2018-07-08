@@ -13,16 +13,9 @@ def usage():
 
 
 def get_documents(dump):
-    rest = dump
-    while len(rest) > 100:
-        # find the first document body in the forestdb_dump output
-        result = re.search('''\nDoc ID:\s([^\n]+).*?\n\s+Body:\s\(hex\)\s*\n(.*?)\n\n''', rest, flags=re.DOTALL|re.MULTILINE)
-        body = None
-        if not result:
-            return
+    for result in re.finditer('''.*?\nDoc ID:\s([^\n]+).*?\n\s+Body:\s\(hex\)\s*\n(.*?)\n\n''', dump, flags=re.DOTALL|re.MULTILINE):
         docid = result.group(1)
         raw_body = result.group(2)
-        rest = rest[result.end():]
 
         if docid in ["privateUUID", "publicUUID"]:
             continue
@@ -32,8 +25,7 @@ def get_documents(dump):
         # strip trailing space and interpreted bytes on each line
         body = re.sub('''\s{3}.*$''', '', body, flags=re.MULTILINE)
         # split to individual bytes and decode bytes to binary string
-        b = re.split('''\s+''', body)
-        raw = ''.join([chr(int(x, 16)) for x in b])
+        raw = re.sub("\s*([a-f0-9]{2})\s*", (lambda x: chr(int(x.group(1), 16))), body)
 
         # find the json string in the binary data
         result = re.search('''(\{[\w\s\"\{\}\[\]:\.\?,\-_]{10,}\})''', raw)
