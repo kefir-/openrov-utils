@@ -48,8 +48,12 @@ def main():
     try:
         command = dbdump_cmd + [dbfile]
         dump = subprocess.check_output(command).decode('utf-8')
+    except FileNotFoundError:
+        print("forestdb_dump not available. Compile from https://github.com/couchbase/forestdb.git")
+        print("and make sure the executable is in your PATH.")
+        sys.exit(1)
     except Exception:
-        print("Error running command, bailing out:", command, file=sys.stderr)
+        print("Error running forestdb_dump, bailing out:", command, file=sys.stderr)
         sys.exit(1)
 
     # find the first document body in the forestdb_dump output
