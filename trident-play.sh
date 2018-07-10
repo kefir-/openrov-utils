@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# (C) Ketil Froyn <ketil@froyn.name> 2018
+#
+# Try to play a .h264 file from the OpenROV Trident
+# using vlc or ffplay
+#
 VLC="$(which vlc)"
 FFPLAY="$(which ffplay)"
 

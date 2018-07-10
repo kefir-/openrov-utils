@@ -1,4 +1,10 @@
 #!/usr/bin/env python3
+#
+# (C) Ketil Froyn <ketil@froyn.name> 2018
+#
+# This is a tool that tries to fetch timestamps and telemetry
+# data from the OpenROV Trident's database files.
+#
 import re
 import sys
 import os 

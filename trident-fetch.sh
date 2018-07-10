@@ -1,6 +1,10 @@
 #!/bin/bash
 #
-# Sample wrapper to fetch 
+# (C) Ketil Froyn <ketil@froyn.name> 2018
+#
+# Sample wrapper to fetch OpenROV Trident files from the
+# device they were recorded on. Depends on the device running
+# the Sweech app.
 #
 
 SWEECH_URL=""

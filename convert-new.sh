@@ -1,4 +1,10 @@
 #!/bin/bash
+#
+# (C) Ketil Froyn <ketil@froyn.name> 2018
+#
+# Script that automates several steps of my standard workflow
+# when working with the OpenROV Trident
+#
 BASE=$HOME/openrov/data
 for fdb in $BASE/s_*.cblite2/db.forest.?; do
     id=$(echo "$fdb" | sed 's/^.*s_//; s/.cblite2.*$//')
