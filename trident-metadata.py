@@ -144,7 +144,7 @@ def main():
             continue
         else:
             if d["data"] != "":
-                print("{2}.{3} {0}: {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
+                print("{2}.{3} {0} {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
 
     
 
