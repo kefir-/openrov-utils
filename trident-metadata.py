@@ -14,7 +14,7 @@ import time
 import getopt
 
 def usage():
-    print("Usage: trident-metadata.py <options> <filename>")
+    print("Usage: trident-metadata.py <options> <path.to.cblite2/db.forest.0>")
     print("    -a: dump all, no output time")
     print("    -f: specify strftime format")
     print("    -h: display this message, then exit")
