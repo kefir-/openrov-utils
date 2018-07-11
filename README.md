@@ -74,11 +74,12 @@ Telemetry data includes lots of stuff, like:
 etc, and many appear to be logged every second or every few seconds.
 
 You can see all of the unique telemetry tags that were logged in a particular session with a command like this:
+
     ./trident-metadata.py -a <pathTo>/db.forest.0|awk '{print $2}'|sort -u
 
 ## Usage on macOS ##
 
-Script trident-metadat.py has been tested on macOS High Sierra and works fine. You'll have to install
+Script ``trident-metadata.py`` has been tested on macOS High Sierra and works fine. You'll have to install
 forestdb_dump and snappy from source, or use your favorite package manager like Homebrew.
 
 To pull the data off of your Android controller using a USB cable, you can use Google's [Android File Transfer 
