@@ -14,7 +14,16 @@ import time
 import getopt
 
 def usage():
-    print("You're doing it wrong. Use the source, Luke.")
+    print("Usage: trident-metadata.py <options> <filename>")
+    print("    -a: dump all, no output time")
+    print("    -f: specify strftime format")
+    print("    -h: display this message, then exit")
+    print("    -s: output standard Trident date string")
+    print("    -t: output time")
+    print("    -T: don't output time")
+    print("    -e: output seconds since epoch")
+    print("    -l: use local time")
+    print("    -u: use UTC/gmtime (default)")
     sys.exit(1)
 
 
