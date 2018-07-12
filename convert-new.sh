@@ -37,3 +37,7 @@ done
 
 # To clean up and reprocess everything:
 # find $HOME/openrov/data -type l | xargs rm -v
+#
+# To regenerate all telemetry files, just delete all *.telemetry files,
+# and rerun script. This is useful in case of updates to
+# trident-metadata.py that change the output format.
