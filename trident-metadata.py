@@ -104,6 +104,7 @@ def main():
         elif o == '-e':
             # Output seconds since epoch
             strftime_format = "%s"
+            localtime = True # otherwise it'll count from the wrong base
         elif o == '-l':
             # use localtime (default is UTC / gmtime)
             localtime = True
