@@ -15,8 +15,13 @@ for fdb in $BASE/s_*.cblite2/db.forest.?; do
     fi
     if [ ! -e $BASE/$id.mp4 ]; then
         echo "Parsing metadata for $id"
-        ts=$(trident-metadata.py -l -s "$fdb")
-        ts2=$(trident-metadata.py "$fdb")
+        epoch_ts=$(trident-metadata.py -l -e "$fdb")
+        # LANG=en_US forces the language, otherwise locale settings may give different month names
+        ts=$(LANG=en_US date +Trident-%b-%d-%H%M%S -d @$epoch_ts)
+        ts2=$(date -u +%Y%m%d-%H%M%SZ -d @$epoch_ts)
+        echo $epoch_ts > $BASE/$id.timestamp
+        echo $ts >> $BASE/$id.timestamp
+        echo $ts2 >> $BASE/$id.timestamp
         trident-metadata.py -a "$fdb" > $BASE/$id.telemetry
         # create the mp4 file if it hasn't already been done. Standardize on the
         # format used internally by the OpenROV Cockpit app, for compatibility.
