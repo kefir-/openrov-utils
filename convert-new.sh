@@ -8,13 +8,15 @@
 BASE=$HOME/openrov/data
 for fdb in $BASE/s_*.cblite2/db.forest.?; do
     id=$(echo "$fdb" | sed 's/^.*s_//; s/.cblite2.*$//')
-    # echo "$id:$fdb";
+    if [ ! -e $BASE/$id.telemetry ]; then
+        echo "Parsing metadata for $id"
+        trident-metadata.py -a "$fdb" > $BASE/$id.telemetry
+    fi
     if [ ! -e $BASE/$id.h264 ]; then
         echo "Got couchbase DB, but no matching .h264 video: $id"
         continue
     fi
     if [ ! -e $BASE/$id.mp4 ]; then
-        echo "Parsing metadata for $id"
         epoch_ts=$(trident-metadata.py -l -e "$fdb")
         # LANG=en_US forces the language, otherwise locale settings may give different month names
         ts=$(LANG=en_US date +Trident-%b-%d-%H%M%S -d @$epoch_ts)
@@ -22,7 +24,6 @@ for fdb in $BASE/s_*.cblite2/db.forest.?; do
         echo $epoch_ts > $BASE/$id.timestamp
         echo $ts >> $BASE/$id.timestamp
         echo $ts2 >> $BASE/$id.timestamp
-        trident-metadata.py -a "$fdb" > $BASE/$id.telemetry
         # create the mp4 file if it hasn't already been done. Standardize on the
         # format used internally by the OpenROV Cockpit app, for compatibility.
         if [ ! -e $BASE/$ts.mp4 ]; then
