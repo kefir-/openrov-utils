@@ -12,6 +12,7 @@ import subprocess
 import json
 import time
 import getopt
+import traceback
 
 def usage():
     print("Usage: trident-metadata.py <options> <path.to.cblite2/db.forest.0>")
@@ -75,6 +76,7 @@ def print_time(data, localtime, strftime_format):
     ts_str = time.strftime(strftime_format, timetuple)
     print(ts_str)
 
+
 def main():
 
     strftime_format = "%Y%m%d-%H%M%SZ"
@@ -119,15 +121,33 @@ def main():
     except IndexError:
         usage()
 
+    dump = ""
     try:
         command = dbdump_cmd + [dbfile]
-        dump = subprocess.check_output(command).decode('utf-8')
+        if dump_all:
+            dump = subprocess.check_output(command).decode('utf-8')
+        else:
+            got_doc = False
+            proc = subprocess.Popen(command, bufsize=1, stdout=subprocess.PIPE)
+            for line in proc.stdout:
+                line = line.decode('utf-8')
+                if not got_doc:
+                    if re.match('^Doc ID:', line):
+                        got_doc = True
+                        dump = "\n" # To match regex...
+                if got_doc:
+                    dump = dump + line
+                    if re.match('^\s*$', line):
+                        break
+            proc.kill()
+            proc.wait()
     except FileNotFoundError:
         print("forestdb_dump not available. Compile from https://github.com/couchbase/forestdb.git")
         print("and make sure the executable is in your PATH.")
         sys.exit(1)
     except Exception:
         print("Error running forestdb_dump, bailing out:", command, file=sys.stderr)
+        traceback.print_exc(e)
         sys.exit(1)
 
     data = None
