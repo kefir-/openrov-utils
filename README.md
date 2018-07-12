@@ -25,7 +25,7 @@ also unpractical after you've done more than a year of recordings).
 
 It also creates uses the `trident-metadata.py` tool to create a flat text file with telemetry data.
 
-### trident-play.sh
+## trident-play.sh
 
 Utility that may come in handy.
 If you want to simply view a .h264 file, try the script
@@ -34,7 +34,7 @@ script searches your PATH for vlc or ffplay, and plays the .h264 video
 directly, at the correct frame rate, without doing any heavy
 transcoding.
 
-### trident-metadata.py
+## trident-metadata.py
 
 Utility used by the other tools.
 The `trident-metadata.py` script uses the `forestdb_dump` command
@@ -72,3 +72,16 @@ Telemetry data includes lots of stuff, like:
 * battery temperature
 
 etc, and many appear to be logged every second or every few seconds.
+
+You can see all of the unique telemetry tags that were logged in a particular session with a command like this:
+
+    ./trident-metadata.py -a <pathTo>/db.forest.0|awk '{print $2}'|sort -u
+
+## Usage on macOS ##
+
+Script ``trident-metadata.py`` has been tested on macOS High Sierra and works fine. You'll have to install
+forestdb_dump and snappy from source, or use your favorite package manager like Homebrew.
+
+To pull the data off of your Android controller using a USB cable, you can use Google's [Android File Transfer 
+utility (https://www.android.com/filetransfer/)](https://www.android.com/filetransfer/). You'll have to browse
+manually and manage the file retrieval yourself.

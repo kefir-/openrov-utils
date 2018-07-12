@@ -14,7 +14,16 @@ import time
 import getopt
 
 def usage():
-    print("You're doing it wrong. Use the source, Luke.")
+    print("Usage: trident-metadata.py <options> <path.to.cblite2/db.forest.0>")
+    print("    -a: dump all, no output time")
+    print("    -f: specify strftime format")
+    print("    -h: display this message, then exit")
+    print("    -s: output standard Trident date string")
+    print("    -t: output time")
+    print("    -T: don't output time")
+    print("    -e: output seconds since epoch")
+    print("    -l: use local time")
+    print("    -u: use UTC/gmtime (default)")
     sys.exit(1)
 
 
@@ -135,7 +144,7 @@ def main():
             continue
         else:
             if d["data"] != "":
-                print("{2}.{3} {0}: {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
+                print("{2}.{3} {0} {1}".format(d["topic"], d["data"], d["rx_ts"]["sec"], d["rx_ts"]["nanosec"]))
 
     
 
